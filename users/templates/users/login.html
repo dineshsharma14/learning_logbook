@@ -1,0 +1,30 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header %}
+
+<h2>Log in to your account.</h2>
+
+{% endblock header %}
+
+{% block content %}
+
+<!--{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %} --> <!--The django-bootstrap3 manages the form errors automatically-->
+
+<form method = "post" action = "{% url 'users:login' %}" class = "form">
+  {% csrf_token %}
+  
+    {% bootstrap_form form %}
+    
+    <!--{{ form.as_p }}--><!--Same is not needed when you use above mentioned tag-->
+
+    {% buttons %}
+      <button name = "submit" class = "btn btn-primary">log in</button>
+    {% endbuttons %}
+           
+  <input type ="hidden" name = "next" value = "{% url 'learning_logs:index' %}"/>
+</form>
+
+{% endblock content %}

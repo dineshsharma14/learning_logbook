@@ -1,0 +1,31 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap3 %}
+
+{% block header%}
+
+<h1>Edit entry:</h1>
+<small>Right now you can not delete an entry or topic right away (we are
+working on it to implement) meanwhile if you want to edit, it is possible
+please go ahead and do it.</small>
+
+{% endblock header %}
+
+{% block content %}
+
+<h2><a href = "{% url 'learning_logs:topic' topic.id %}">{{topic}}</a></h2>
+
+<form action = "{% url 'learning_logs:edit_entry' entry.id %}" method = 'post'
+      class = "form">
+      
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <!--{{form.as_p}}-->
+  {% buttons %}
+  <button name = "submit" class = "btn btn-primary">save changes</button>
+  {% endbuttons %}
+</form>
+
+{% endblock content %}
+
+
+
