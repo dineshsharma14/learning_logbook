@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -22,7 +22,7 @@ def topics(request): #fx needs request object Django received from the server.
 @login_required
 def topic(request, topic_id):
     """Show the details of one particular topic"""
-    topic = Topic.objects.get(id = topic_id)#instance of Topic class and below is instance of Entry class FK to this topic.
+    topic = get_object_or_404(Topic, id = topic_id)#instance of Topic class and below is instance of Entry class FK to this topic.
     # Make sure topic belongs to the current user.
     if topic.owner != request.user:
         raise Http404
